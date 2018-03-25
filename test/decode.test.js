@@ -61,3 +61,19 @@ test(`decode GPS data`, () => {
   expect(data.size).toEqual(9);
   expect(data.channel).toEqual(1);
 });
+
+
+test(`decode GPS data with non-standard object ID`, () => {
+  const decoded = lpp.decode(Buffer.from(`0196fbe7ed0c401f6cfc`, `hex`));
+  const data = decoded[0];
+
+  const expectedData = [
+    -6.868658,
+    107.580134
+  ];
+  expect(decoded.length).toEqual(1);
+  expect(data.data).toEqual(expect.arrayContaining(expectedData));
+  expect(data.type).toEqual(`IPSO_GPS_NONSTD`);
+  expect(data.size).toEqual(8);
+  expect(data.channel).toEqual(1);
+});

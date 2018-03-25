@@ -71,6 +71,12 @@ function decode(buffer) {
           payload.bufferTo3BytesSignedInteger(slice.slice(6, 9)) / 100,
         ];
         break;
+      case payload.TYPES.IPSO_GPS_NONSTD:
+        data = [
+          slice.readInt32BE(0) / (1e7 * 1.0),
+          slice.readInt32BE(4) / (1e7 * 1.0),
+        ];
+        break;
     }
 
     cursor += length;
