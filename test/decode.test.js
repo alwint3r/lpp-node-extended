@@ -88,3 +88,14 @@ test(`decode altitude data from IPSO extension pack`, () => {
   expect(data.size).toEqual(4);
   expect(data.channel).toEqual(1);
 });
+
+test(`decode altitude data from IPSO extension pack`, () => {
+  const decoded = lpp.decode(Buffer.from(`0184492c`, `hex`));
+  const data = decoded[0];
+
+  expect(decoded.length).toEqual(1);
+  expect(data.data).toEqual(187.32);
+  expect(data.type).toEqual(`IPSO_DIRECTION`);
+  expect(data.size).toEqual(2);
+  expect(data.channel).toEqual(1);
+});
