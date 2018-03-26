@@ -73,7 +73,7 @@ test(`decode GPS data with non-standard object ID`, () => {
   ];
   expect(decoded.length).toEqual(1);
   expect(data.data).toEqual(expect.arrayContaining(expectedData));
-  expect(data.type).toEqual(`IPSO_GPS_NONSTD`);
+  expect(data.type).toEqual(`IPSO_GPS_LOCATION_NONSTD`);
   expect(data.size).toEqual(8);
   expect(data.channel).toEqual(1);
 });
