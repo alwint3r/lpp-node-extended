@@ -77,3 +77,14 @@ test(`decode GPS data with non-standard object ID`, () => {
   expect(data.size).toEqual(8);
   expect(data.channel).toEqual(1);
 });
+
+test(`decode altitude data from IPSO extension pack`, () => {
+  const decoded = lpp.decode(Buffer.from(`017900015702`, `hex`));
+  const data = decoded[0];
+
+  expect(decoded.length).toEqual(1);
+  expect(data.data).toEqual(878.1);
+  expect(data.type).toEqual(`IPSO_ALTITUDE`);
+  expect(data.size).toEqual(4);
+  expect(data.channel).toEqual(1);
+});

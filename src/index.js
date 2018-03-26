@@ -77,6 +77,9 @@ function decode(buffer) {
           slice.readInt32BE(4) / (1e7 * 1.0),
         ];
         break;
+      case payload.TYPES.IPSO_ALTITUDE:
+        data = slice.readInt32BE() / 100.0;
+        break;
     }
 
     cursor += length;
