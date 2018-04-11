@@ -83,6 +83,9 @@ function decode(buffer) {
       case payload.TYPES.IPSO_DIRECTION:
         data = slice.readInt16BE() / 100.0;
         break;
+      case payload.TYPES.IPSO_STEP_COUNT:
+        data = slice.readInt16BE();
+        break;
     }
 
     cursor += length;
