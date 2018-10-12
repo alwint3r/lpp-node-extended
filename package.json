@@ -1,5 +1,5 @@
 {
-  "name": "lpp-node",
+  "name": "lpp-node-extended",
   "version": "1.0.0",
   "description": "Low power payload for nodejs",
   "main": "src/index.js",
@@ -10,9 +10,9 @@
   "author": "Alwin Arrasyid <alwin.ridd@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "jest": "^22.4.3"
+    "jest": "^23.6.0"
   }
 }
