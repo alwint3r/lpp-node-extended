@@ -2,13 +2,17 @@
   "name": "lpp-node-extended",
   "version": "1.0.1",
   "description": "Low power payload for nodejs",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "pretest": "npm run build",
     "test": "jest --notify",
     "prepack": "npm run build"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "keywords": [],
   "author": "Alwin Arrasyid <alwin.ridd@gmail.com>",
   "license": "MIT",
