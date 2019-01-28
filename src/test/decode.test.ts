@@ -1,4 +1,4 @@
-const lpp = require(`../src`);
+const lpp = require(`../`);
 
 test(`decode temperature data`, () => {
   const decoded = lpp.decode(Buffer.from(`03670110`, `hex`));

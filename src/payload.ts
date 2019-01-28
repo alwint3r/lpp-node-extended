@@ -1,8 +1,10 @@
-'use strict';
+import * as _ from 'lodash';
 
-const _ = require(`lodash`);
+export interface IPSOTypesObject {
+  [key: string]: string,
+}
 
-const TYPES = {
+export const TYPES: IPSOTypesObject = {
   IPSO_DIGITAL_INPUT: `IPSO_DIGITAL_INPUT`,
   IPSO_DIGITAL_OUTPUT: `IPSO_DIGITAL_OUTPUT`,
   IPSO_ANALOG_INPUT: `IPSO_ANALOG_INPUT`,
@@ -24,7 +26,11 @@ const TYPES = {
   IPSO_GENERIC_INT16: `IPSO_GENERIC_INT16`,
 };
 
-const SIZES = {
+export interface IPSOTypeSizesObject {
+  [key: string]: number,
+}
+
+export const SIZES: IPSOTypeSizesObject = {
   [TYPES.IPSO_DIGITAL_INPUT]: 1,
   [TYPES.IPSO_DIGITAL_OUTPUT]: 1,
   [TYPES.IPSO_ANALOG_INPUT]: 2,
@@ -45,7 +51,11 @@ const SIZES = {
   [TYPES.IPSO_GENERIC_INT16]: 2,
 };
 
-const OBJECT_IDS = {
+export interface IPSOObjectIDObject {
+  [key: string]: number,
+}
+
+export const OBJECT_IDS: IPSOObjectIDObject = {
   [TYPES.IPSO_DIGITAL_INPUT]: 0,
   [TYPES.IPSO_DIGITAL_OUTPUT]: 1,
   [TYPES.IPSO_ANALOG_INPUT]: 2,
@@ -66,13 +76,18 @@ const OBJECT_IDS = {
   [TYPES.IPSO_GENERIC_INT16]: 153,
 };
 
-const OBJECT_IDS_TO_TYPES_MAP = _.invert(OBJECT_IDS);
+export interface IPSOObjectIDToTypesMapping {
+  [key: number]: string,
+}
 
-function getFullIPSOObjectID(objectId) {
+
+export const OBJECT_IDS_TO_TYPES_MAP: IPSOObjectIDToTypesMapping = _.invert(OBJECT_IDS);
+
+export function getFullIPSOObjectID(objectId: number): number {
   return 3200 + objectId;
 }
 
-function getPayloadSizeFromObjectID(objectId) {
+export function getPayloadSizeFromObjectID(objectId: number): number | undefined {
   const type = OBJECT_IDS_TO_TYPES_MAP[objectId];
   if (!type) {
     return undefined;
@@ -81,15 +96,15 @@ function getPayloadSizeFromObjectID(objectId) {
   return SIZES[type];
 }
 
-function getPayloadSize(type) {
+export function getPayloadSize(type: string) {
   return SIZES[type];
 }
 
-function getObjectIdFromType(type) {
+export function getObjectIdFromType(type: string) {
   return OBJECT_IDS[type];
 }
 
-function createPayloadObject(objectId, data, channel) {
+export function createPayloadObject(objectId: number, data: any, channel: number) {
   const type = OBJECT_IDS_TO_TYPES_MAP[objectId];
  
   return {
@@ -101,28 +116,14 @@ function createPayloadObject(objectId, data, channel) {
   };
 }
 
-function bufferTo3BytesSignedInteger(buffer) {
+export function bufferTo3BytesSignedInteger(buffer: Buffer) {
   if (buffer.length < 3) {
     return NaN;
   }
 
   if (buffer[0] & 0x80) {
-    return Buffer.concat([Buffer.from([0xFF]), buffer]).readInt32BE();
+    return Buffer.concat([Buffer.from([0xFF]), buffer]).readInt32BE(0);
   }
 
   return (buffer[0] << 16 | buffer[1] << 8 | buffer[2]);
-}
-
-module.exports = {
-  SIZES,
-  OBJECT_IDS,
-  OBJECT_IDS_TO_TYPES_MAP,
-  TYPES,
-
-  getPayloadSize,
-  getObjectIdFromType,
-  getFullIPSOObjectID,
-  getPayloadSizeFromObjectID,
-  createPayloadObject,
-  bufferTo3BytesSignedInteger
 }

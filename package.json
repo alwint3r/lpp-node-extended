@@ -4,15 +4,23 @@
   "description": "Low power payload for nodejs",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --notify"
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "jest --notify",
+    "prepack": "npm run build"
   },
   "keywords": [],
   "author": "Alwin Arrasyid <alwin.ridd@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/lodash": "^4.14.120",
+    "@types/node": "^10.12.18",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "jest": "^23.6.0"
+    "@types/jest": "^23.3.13",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.4"
   }
 }
